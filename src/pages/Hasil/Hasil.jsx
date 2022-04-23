@@ -2,8 +2,11 @@ import Header from '../../components/Header/Header'
 import FormPencarian from '../../components/FormPencarian/FormPencarian';
 import Footer from '../../components/Footer/Footer'
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CardMobil from '../../components/CardMobil/CardMobil'
+import { useDispatch, useSelector } from 'react-redux';
+import { getHasil } from '../../redux/actions/hasilAction';
+
 
 
 const styles = {
@@ -22,37 +25,46 @@ const styles = {
 }
 
 function Hasil() {
-    const [listData, setListData]=useState([])
-    const getData= async ()=> {
-        try {
-           const resp=await axios.get("https://rent-cars-api.herokuapp.com/customer/car")
-           setListData(resp.data)
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    // const [listData, setListData]=useState([])
+    // const getData= async ()=> {
+    //     try {
+    //        const resp=await axios.get("https://rent-cars-api.herokuapp.com/customer/car")
+    //        setListData(resp.data)
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
+    const dispatch = useDispatch();
+    const { isLoading, data: hasil } = useSelector(
+        (state) => state.hasil
+    );
+
     useEffect(()=> {
-        getData()
-    },[])
+        dispatch(getHasil());
+    }, [dispatch])
+
     return (
         <div container>
             <Header />
             <div className="container style= py-5">            
             <FormPencarian  />
-         <div className="row py-5">
-            {listData?.map(item =>{
-                return (
-                    <div className="col-4" key={item.id}> 
-                    <CardMobil sx={styles.card}/>
-                    </div>
+            <div className="row py-5">
+                {isLoading ? (
+                    <div>Loading...</div>
+                ) : (
+                    hasil?.map((hasil) => {
+                        return (
+                            <div className="col-4" key={hasil.id}> 
+                            <CardMobil sx={styles.card}/>
+                            </div>
+                        )
+                    })
                 )
-            })}
-            
-               
-        </div>
-        </div>
-        <Footer />
-    )   </div>
+            }          
+            </div>
+            </div>
+            <Footer />
+      </div>
     )
 }
 export default Hasil;

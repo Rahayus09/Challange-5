@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import {
     Button,
   } from '@mui/material';
-
+ 
 
 function CardMobil () {
     const navigate = useNavigate()
@@ -33,24 +33,30 @@ function CardMobil () {
         //     </div>
         // </div>  
         <div className="card">
-                    <div className="card-body py-5">
-                        <h5 className="card-title">
-                            <img src={mobil} alt="hasilmobil" />
-                        </h5>
-                        <p>Nama/Tipe Mobil</p>
-                        <h6>Rp 430.000 / hari</h6>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                        <p className="card-text"><img src={users} alt="user" />4 orang</p>
-                        <p className="card-text"><img src={Rent} alt="rent" /></p>
-                        <p className="card-text"><img src={calendar} alt="cal" />Tahun 2020</p>
-``                      </p>
-                        <div className="btn-group" aria-label="Basic example">
-                            <Button variant="contained">
-                                <p onClick={() =>navigate("/detail")}>Pilih Mobil</p>
-                            </Button>                            
-                        </div>
+            <div className="card-body py-5">
+                <h5 className="card-title">
+                    <img src={mobil} alt="hasilmobil" />
+                </h5>
+                    <p>Nama/Tipe Mobil</p>
+                    <h6>Rp 430.000 / hari</h6>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                    <p className="card-text"><img src={users} alt="user" />4 orang</p>
+                    <p className="card-text"><img src={Rent} alt="rent" /></p>
+                    <p className="card-text"><img src={calendar} alt="cal" />Tahun 2020</p>
+                    </p>
+                    <div className="d-grid gap-2" aria-label="Basic example">
+                    <button
+                        type="button"
+                        className=" btn btn-success px-4 py-2 rounded"
+                        onClick={() => navigate("/detail")}
+                    > Pilih Mobil
+                    </button>
+                        {/* <Button className="px-4 py-1 bg-blue-500 rounded-lg text-white" variant="contained">
+                            <p onClick={() =>navigate("/detail")}>Pilih Mobil</p>
+                        </Button>                             */}
                     </div>
-                  </div>
+            </div>
+        </div>
     );
 }
 export default CardMobil;
